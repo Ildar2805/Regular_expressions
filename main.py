@@ -36,12 +36,17 @@ def change_number(contacts_list):
 
 
 def drop_duplicates(list):
-    for i in range(len(list)-1):
-        if list[i][0] == list[i+1][0] and list[i][1] == list[i+1][1]:
-            for x in range(len(list[i])):
-                if list[i+1][x] != '':
-                    list[i][x] = list[i+1][x]
-            del(list[i+1])
+    length = len(list)
+    indexes = []
+    for i in range(length-1):
+        for m in range(i+1, length):
+            if list[i][0] == list[m][0] and list[i][1] == list[m][1]:
+                for x in range(len(list[i])):
+                    if list[m][x] != '':
+                        list[i][x] = list[m][x]
+                indexes.append(m)
+    for index in reversed(indexes):
+        del(list[index])
     return list
 
 
